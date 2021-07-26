@@ -1,4 +1,5 @@
 #!/bin/bash
 yum install epel-release -y
 yum install -y supervisor
-systemctl enable supervisord
+mv /home/app.ini /etc/supervisord.d/
+echo "supervisord -c /etc/supervisord.conf" >> /root/.bashrc
