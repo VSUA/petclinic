@@ -10,16 +10,16 @@ pipeline {
             }
             steps {
                 sh 'pwd'
-                sh 'git clone https://github.com/VSUA/petclinic.git'
-                sh 'cp -r ? ./petclinic'
-                sh 'ls ./petclinic/'
-                dir('./petclinic') {
-                    sh 'ls'
-                    sh './mvnw package -Dcheckstyle.skip=true'
-                }
-                sh 'ls ./petclinic/target/'
-                sh 'cp ./petclinic/target/spring-petclinic-2.4.5.jar ./petclinic/'
-                sh 'ls /tmp/'
+                //sh 'cp -r ? ./petclinic'
+                //sh 'ls ./petclinic/'
+                //dir('./petclinic') {
+                //    sh 'ls'
+                //    sh './mvnw package -Dcheckstyle.skip=true'
+                //}
+                sh './mvnw clean package -Dcheckstyle.skip=true'
+                //sh 'ls ./petclinic/target/'
+                sh 'cp ./target/spring-petclinic-2.4.5.jar .'
+                //sh 'ls /tmp/'
                 
             }
         }
@@ -36,14 +36,14 @@ pipeline {
             }
             
             steps {
-                dir('./petclinic') {
-                    script {
-                        dockerImage = docker.build registry + ":latest"//$BUILD_NUMBER
-                        docker.withRegistry( '', registryCredential ) {
-                            dockerImage.push()
-                        }
+                //dir('./petclinic') {
+                script {
+                    dockerImage = docker.build registry + ":latest"//$BUILD_NUMBER
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
                     }
                 }
+                //}
                 sh "docker rmi $registry:latest"//$BUILD_NUMBER
             }
         }
@@ -57,15 +57,15 @@ pipeline {
             }
         }
         
-        stage('Remove project folder') {
-            agent {
-                label 'DockerNode'    
-            }
+        //stage('Remove project folder') {
+        //    agent {
+        //        label 'DockerNode'    
+        //    }
             
-            steps {
-                sh 'rm -rf ./petclinic'
-            }
-        }
+        //    steps {
+        //        sh 'rm -rf ./petclinic'
+        //    }
+        //}
     }
     environment {
         EMAIL_TO = 'slobodianiuk.vladyslav@gmail.com'
