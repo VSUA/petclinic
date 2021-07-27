@@ -16,7 +16,7 @@ pipeline {
                 //    sh 'ls'
                 //    sh './mvnw package -Dcheckstyle.skip=true'
                 //}
-                sh './mvnw package -Dcheckstyle.skip=true'
+                sh './mvnw clean package -Dcheckstyle.skip=true'
                 //sh 'ls ./petclinic/target/'
                 sh 'cp ./target/spring-petclinic-2.4.5.jar .'
                 //sh 'ls /tmp/'
