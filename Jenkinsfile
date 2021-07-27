@@ -10,7 +10,6 @@ pipeline {
             }
             steps {
                 sh 'pwd'
-                sh 'git clone https://github.com/VSUA/petclinic.git'
                 sh 'cp -r ? ./petclinic'
                 sh 'ls ./petclinic/'
                 dir('./petclinic') {
