@@ -11,13 +11,13 @@ pipeline {
             steps {
                 sh 'pwd'
                 //sh 'cp -r ? ./petclinic'
-                sh 'ls ./petclinic/'
+                //sh 'ls ./petclinic/'
                 //dir('./petclinic') {
                 //    sh 'ls'
                 //    sh './mvnw package -Dcheckstyle.skip=true'
                 //}
                 sh './mvnw package -Dcheckstyle.skip=true'
-                sh 'ls ./petclinic/target/'
+                //sh 'ls ./petclinic/target/'
                 sh 'cp ./target/spring-petclinic-2.4.5.jar .'
                 //sh 'ls /tmp/'
                 
